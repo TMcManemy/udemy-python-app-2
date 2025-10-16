@@ -41,14 +41,14 @@ jobs:
       - name: Modify values file
         shell: bash
         run: |
-          echo 
+          echo ${{needs.ci.outputs.commit_id}}
           pip install yq
-          yq -Yi '.image.tag = ""' charts/udemy-python-app-2/values-dev.yaml
+          yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/udemy-python-app-2/values-dev.yaml
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: 'Updates values.yaml with commit '
+          message: 'Updates values.yaml with commit ${{needs.ci.ouputs.commit_id}}'
 
       - name: Install argocd
         shell: bash
