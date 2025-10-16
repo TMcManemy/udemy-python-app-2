@@ -8,7 +8,7 @@ app = Flask(__name__)
 def details():
     return jsonify({
         'host': socket.gethostname(),
-        'env': '',
+        'env': 'foo',
         'app_name':''
         })
 
